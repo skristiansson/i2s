@@ -32,7 +32,7 @@ module i2s_tx #(
 	output reg		lrclk,
 	output			sdata,
 
-	// Parallell datastreams
+	// Parallel datastreams
 	input [AUDIO_DW-1:0]	left_chan,
 	input [AUDIO_DW-1:0]	right_chan
 );

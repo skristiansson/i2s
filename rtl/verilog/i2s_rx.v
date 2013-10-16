@@ -32,7 +32,7 @@ module i2s_rx #(
 	input				lrclk,
 	input				sdata,
 
-	// Parallell datastreams
+	// Parallel datastreams
 	output reg [AUDIO_DW-1:0]	left_chan,
 	output reg [AUDIO_DW-1:0]	right_chan
 );
