@@ -47,8 +47,9 @@ assign lrclk_nedge = !lrclk & lrclk_r;
 always @(posedge sclk)
 	lrclk_r <= lrclk;
 
+// sdata msb is valid one clock cycle after lrclk switches
 always @(posedge sclk)
-	if (lrclk)
+	if (lrclk_r)
 		right <= {right[AUDIO_DW-2:0], sdata};
 	else
 		left <= {left[AUDIO_DW-2:0], sdata};
@@ -59,7 +60,7 @@ always @(posedge sclk)
 		right_chan <= 0;
 	end else if (lrclk_nedge) begin
 		left_chan <= left;
-		right_chan <= right;
+		right_chan <= {right[AUDIO_DW-2:0], sdata};
 	end
 
 endmodule

@@ -30,7 +30,7 @@ module i2s_tx #(
 	input			rst,
 
 	output reg		lrclk,
-	output			sdata,
+	output reg		sdata,
 
 	// Parallel datastreams
 	input [AUDIO_DW-1:0]	left_chan,
@@ -61,6 +61,7 @@ always @(posedge sclk)
 	else if (bit_cnt == 0)
 		lrclk <= ~lrclk;
 
-assign sdata = lrclk ? right[bit_cnt] : left[bit_cnt];
+always @(posedge sclk)
+	sdata <= lrclk ? right[bit_cnt] : left[bit_cnt];
 
 endmodule
