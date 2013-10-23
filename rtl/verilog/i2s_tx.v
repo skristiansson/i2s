@@ -41,27 +41,27 @@ reg [$clog2(AUDIO_DW)-1:0]	bit_cnt;
 reg [AUDIO_DW-1:0]		left;
 reg [AUDIO_DW-1:0]		right;
 
-always @(posedge sclk)
+always @(negedge sclk)
 	if (rst)
 		bit_cnt <= 0;
 	else
 		bit_cnt <= bit_cnt - 1;
 
 // Sample channels on the transfer of the last bit of the right channel
-always @(posedge sclk)
+always @(negedge sclk)
 	if (bit_cnt == 0 && lrclk) begin
 		left <= left_chan;
 		right <= right_chan;
 	end
 
 // left/right "clock" generation - 0 = left, 1 = right
-always @(posedge sclk)
+always @(negedge sclk)
 	if (rst)
 		lrclk <= 1;
 	else if (bit_cnt == 0)
 		lrclk <= ~lrclk;
 
-always @(posedge sclk)
+always @(negedge sclk)
 	sdata <= lrclk ? right[bit_cnt] : left[bit_cnt];
 
 endmodule
