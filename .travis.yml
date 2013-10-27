@@ -3,6 +3,7 @@ install:
   - "git clone git://github.com/openrisc/orpsoc"
   - "git clone git://github.com/openrisc/orpsoc-cores"
   - "cd orpsoc"
+  - "autoreconf -i"
   - "./configure && make install"
   - "cd ../orpsoc-cores/cores"
   - "ln -s ../../i2s"
