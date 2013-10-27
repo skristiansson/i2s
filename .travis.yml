@@ -1,0 +1,17 @@
+install:
+  - "cd ~/"
+  - "git clone git://github.com/openrisc/orpsoc"
+  - "git clone git://github.com/openrisc/orpsoc-cores"
+  - "cd orpsoc"
+  - "./configure && make install"
+  - "cd ../orpsoc-cores/cores"
+  - "ln -s ../../i2s"
+  - "cd ~/"
+  - "mkdir build-i2s"
+  - "cd build-i2s"
+  - "echo '[main]' > orpsoc.conf"
+  - "echo 'cores_root =../orpsoc-cores/cores' >> orpsoc.conf"
+  - "echo 'systems_root =../orpsoc-cores/systems' >> orpsoc.conf"
+
+script:
+  - "orpsoc sim i2s"
