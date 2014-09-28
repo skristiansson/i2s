@@ -21,6 +21,8 @@ i2s_tx #(
 	.sclk		(sclk),
 	.rst		(rst),
 
+	.prescaler	(32'd32),
+
 	.lrclk		(lrclk),
 	.sdata		(sdata),
 
